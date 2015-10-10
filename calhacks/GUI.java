@@ -1,3 +1,5 @@
+package calhacks;
+
 import objectdraw.*;
 import Acme.*;
 
@@ -8,7 +10,8 @@ public class GUI extends WindowController {
    
    private static int WIDTH;
    private static int HEIGHT;
-
+   private static final int TOP_PADDING = 90; //to be changed later
+   private static final int LEFT_PADDING = 30;
    /**
     * Constructor for a GUI
     * @param args command line arguments; pass them in from main
@@ -27,6 +30,7 @@ public class GUI extends WindowController {
     */
 	public void onMouseClick(Location point) {
       System.out.println("YOOOOOO");
+      YearPlanner mainbox = new YearPlanner (LEFT_PADDING ,TOP_PADDING, canvas);
    }
    
 }
