@@ -9,6 +9,9 @@ public class Term {
 
     /** Adds COURSE to the list of courses. */
     protected void add(Course course) {
+        if (courses.size() >= MAX_CLASSES) {
+            throw new IllegalStateException();
+        }
         courses.add(course);
         courses.sort(null);
     }
@@ -20,6 +23,11 @@ public class Term {
             unit += c.getUnits();
         }
         return unit;
+    }
+    
+    /** Clears the current term of all classes. */
+    protected void clear() {
+        courses.clear();
     }
 
     /** The maximum number of classes taken per term. */
