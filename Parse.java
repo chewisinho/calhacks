@@ -9,11 +9,8 @@ public class Parse {
 	public static void main(String[] args) throws IOException {
 		DownloadPage.sourceCodeGen();
 		String input = DownloadPage.getSourceCode();
-		System.out.println(input);
 		Parse.classlist = createArray(input);
-		for (int i = 0; i < Parse.classlist.size(); i++) {
-			System.out.println(Parse.classlist.get(i)); 
-		}
+		
 	}
 
 	public static ArrayList<String> createArray(String input){
@@ -26,4 +23,8 @@ public class Parse {
 	}
 
 	private static ArrayList<String> classlist;
+
+	public static ArrayList<String> getClassList() {
+		return Parse.classlist;
+	}
 }
