@@ -1,3 +1,4 @@
+
 //skeleton from Stack Overflow
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class DownloadPage {
     public static void sourceCodeGen() throws IOException {
 
         // Make a URL to the web page
-        URL url = new URL("http://stackoverflow.com/questions/6159118/using-java-to-pull-data-from-a-webpage");
+        URL url = new URL("http://guide.berkeley.edu/courses/stat/");
 
         // Get the input stream through URL Connection
         URLConnection con = url.openConnection();
