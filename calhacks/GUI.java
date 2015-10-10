@@ -12,11 +12,14 @@ public class GUI extends WindowController {
    private static int height; //height of window
    private static int boxheight; //yearplanner height
    private static int boxwidth; //yearplanner width
-
    
-   private static final int TOP_PADDING = 90; //to be changed later
-   private static final int LEFT_PADDING = 30;
-   private static final int BOTTOM_PADDING = 30; 
+   private static final int LEFT_PADDING = 40;
+   private static final int BOTTOM_PADDING = 40; 
+   static final int TOP_PADDING = BOTTOM_PADDING * 3; 
+   
+   private static int texty = TOP_PADDING / 2; // y coord for text to be stated
+   private static int textx; //x coord for text to be stated
+
    
    /**
     * Constructor for a GUI
@@ -29,8 +32,12 @@ public class GUI extends WindowController {
 	   height = h;
 	   new Acme.MainFrame(this, args, width, height);
      
+	   //year planner starter pack
        boxheight = h - TOP_PADDING - BOTTOM_PADDING;
        boxwidth = (w / 3) * 2 - LEFT_PADDING;
+       YearPlanner mainbox = new YearPlanner (LEFT_PADDING ,TOP_PADDING,
+				 boxwidth, boxheight, canvas);
+  
    }
 
    /**
@@ -41,8 +48,7 @@ public class GUI extends WindowController {
       System.out.println("YOOOOOO");
       
       
-      YearPlanner mainbox = new YearPlanner (LEFT_PADDING ,TOP_PADDING,
-    		  								 boxwidth, boxheight, canvas);
+      
    }
    
 }
