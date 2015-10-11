@@ -3,8 +3,7 @@ package calhacks;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
-import objectdraw.*;
-import Acme.*;
+import java.io.IOException;
 
 /**
  * @author chris
@@ -21,7 +20,7 @@ public class NGUI extends JPanel {
    /**
     * Constructor for a NGUI
     */
-   public NGUI(int width, int height) {
+   public NGUI(int width, int height) throws IOException {
 
       //JPanel header = new JPanel();
       JPanel wrapper = new JPanel();
@@ -31,8 +30,7 @@ public class NGUI extends JPanel {
 
       String[] test = {"hi", "how", "are", "you"};
       
-      //Panel yearGrid = new NewYearPlanner();
-      Panel yearGrid = new Panel();
+      JPanel yearGrid = new NewYearPlanner();
 
       JComboBox<String> depts = new JComboBox<String>(test);
       JComboBox<String> courses = new JComboBox<String>(test);
