@@ -10,19 +10,18 @@ import java.util.regex.*;
 import java.net.URL;
 import java.net.URLConnection;
 
-/*@author Alexander Tran
+/*@ author Alexander Tran
 October 9, 2015
 Parses the source code from DownloadPage.java to get the specific date. */
 
 public class Parse {
     
-	public static void main(String[] args) throws IOException {
+	public static void run() throws IOException {
         departments = makeDepartments();
         String url;
         for (int i = 0; i < departments.size(); i++) {
             Department caldepartment = new Department(departments.get(i));
             Parse.classlist.add(caldepartment);
-            System.out.println(caldepartment._name);
         }
 	}
 
@@ -127,5 +126,3 @@ public class Parse {
     }    
 
 }
-
-
