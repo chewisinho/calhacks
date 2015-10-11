@@ -51,7 +51,7 @@ public class Parse {
             		elem2 = s.next();
             	}
             	coursetitle += " " + elem2;
-            	coursetitle = coursetitle.substring(15, coursetitle.length()-7);
+            	coursetitle = coursetitle.substring(15, coursetitle.length() - 7);
         		temp.add(coursetitle);
         		// adds Course Units
         		s.next();
