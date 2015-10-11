@@ -22,6 +22,7 @@ public class Schedule {
     /** Adds COURSE to the requested TERM. */
     public void add(Course course, int term) {
         terms.get(term).add(course);
+        System.out.println("Added " + course.getCourseName() + " at term " + term);
     }
     
     /** Clears the requested TERM of all classes. */

@@ -17,7 +17,7 @@ public class NGUI extends JPanel {
    private static Color BUTTON_COLOR = new Color(0x29, 0x28, 0x29);
    private static Color BUTTON_TEXT = new Color(0xff, 0xff, 0xff);
 
-   private JComboBox<String> depts;
+   protected JComboBox<String> depts;
    protected JComboBox<String> courses;
    private JComboBox<String> terms;   
    private JButton addClass;
@@ -25,28 +25,34 @@ public class NGUI extends JPanel {
    private ArrayList<Department> departmentList;
 
    private GUIListener gl = new GUIListener(this);
+   private Schedule _schedule;
+   protected NewYearPlanner _yearGrid;
+   
+   private static String[] _terms = {"1st Year Fall", "1st Year Spring", "1st Year Summer",
+           "2nd Year Fall", "2nd Year Spring", "2nd Year Summer",
+           "3rd Year Fall", "3rd Year Spring", "3rd Year Summer",
+           "4th Year Fall", "4th Year Spring", "4th Year Summer"};
 
    /**
     * Constructor for a NGUI
     */
-   public NGUI(int width, int height) throws IOException {
+   public NGUI(int width, int height, Schedule schedule) throws IOException {
 
       //JPanel header = new JPanel();
       JPanel wrapper = new JPanel();
       wrapper.setLayout(new GridBagLayout());
       departmentList = Parse.getClassList();
+      this.addMouseMotionListener(gl);
+      _schedule = schedule;
 
       GridBagConstraints constraint = new GridBagConstraints();
       
       String[] departments = new String[Parse.getDepartments().size()];
       Parse.getDepartments().toArray(departments);
       Vector<String> empty = new Vector<String>();
-      String[] _terms = {"1st Year Fall", "1st Year Spring", "1st Year Summer",
-              "2nd Year Fall", "2nd Year Spring", "2nd Year Summer",
-              "3rd Year Fall", "3rd Year Spring", "3rd Year Summer",
-              "4th Year Fall", "4th Year Spring", "4th Year Summer"};
 
-      JPanel yearGrid = new NewYearPlanner();
+      NewYearPlanner yearGrid = new NewYearPlanner(schedule);
+      _yearGrid = yearGrid;
 
       depts = new JComboBox<String>(departments);
       courses = new JComboBox<String>(empty);
@@ -84,12 +90,30 @@ public class NGUI extends JPanel {
       add(wrapper);
    }
 
-   public void onAddClass() {
-      Object dept = depts.getSelectedItem();     // these types can be of
-      Object course = courses.getSelectedItem(); // Department, Course, Term
-      Object term = terms.getSelectedItem();
-      // do something with these
-      System.out.println(dept + ", " + course + ", " + term);
+   public void onAddClass() throws IOException {
+      String dept = (String) depts.getSelectedItem();
+      String course = (String) courses.getSelectedItem();
+      String term = (String) terms.getSelectedItem();
+      String units = "0";
+      for (Department d : departmentList) {
+          if (d._name.equals(dept)) {
+              for (ArrayList<String> info : d.courses) {
+                  if (info.get(0).equals(course)) {
+                      units = info.get(2);
+                  }
+              }
+          }
+      }
+      int termNumber = 0;
+      for (int i = 0; i < _terms.length; i += 1) {
+          if (term.equals(_terms[i])) {
+              termNumber = i;
+              break;
+          }
+      }
+      Course _course = new Course(dept.toUpperCase(), course, units);
+      _schedule.add(_course, termNumber);
+      _yearGrid.refresh();
    }
 
    /**
@@ -135,5 +159,4 @@ public class NGUI extends JPanel {
       c.setMinimumSize(d);
       c.setMaximumSize(d);
    }
-
 }

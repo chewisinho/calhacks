@@ -7,17 +7,44 @@ import java.io.InputStream;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import objectdraw.*;
 
 public class NewYearPlanner extends JPanel {
     
+    private Schedule _schedule;
+    private static final int LEFT_PADDING = 60;
+    private static final int TOP_X = 75, TOP_Y = 120, TERM_HEIGHT = (720 - 120 - 60) / Schedule.NUM_YEARS,
+            TERM_WIDTH = (1280 * 2 / 3 - LEFT_PADDING) / Schedule.NUM_TERMS;
+    private Graphics g;
+    private JLabel picLabel;
+    
     /** Initializes the canvas. */
-    public NewYearPlanner() throws IOException {
+    public NewYearPlanner(Schedule schedule) throws IOException {
+        _schedule = schedule;
+        g = getGraphics();
         Dimension d = new Dimension(Main.WIDTH * 2 / 3, Main.HEIGHT);
         setPreferredSize(d);
         setMinimumSize(d);
         setMaximumSize(d);
         BufferedImage background = ImageIO.read(new File("calhacks/yearGraphic.png"));
-        JLabel picLabel = new JLabel(new ImageIcon(background));
+        picLabel = new JLabel(new ImageIcon(background));
         add(picLabel);
+    }
+    
+    public void refresh() throws IOException {
+        add(picLabel);
+        System.out.println("Entered REFRESH.");
+        System.out.println(Schedule.NUM_YEARS * Schedule.NUM_TERMS);
+        g.setColor(Color.BLACK);
+        for (int i = 0; true; i += 1) {
+            System.out.println("Entering loop " + i);
+            Term t = _schedule.getTerm(i);
+            int j = 0;
+            for (Course c : t.courses) {
+                g.drawString(c.getCourseName(), TOP_X + TERM_WIDTH * (i % Schedule.NUM_YEARS),
+                        TOP_Y + TERM_HEIGHT * (i / Schedule.NUM_YEARS) + 20 * j);
+                j += 1;
+            }
+        }
     }
 }
