@@ -1,6 +1,7 @@
 package calhacks;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import objectdraw.*;
 import Acme.*;
@@ -13,6 +14,9 @@ public class NGUI extends JPanel {
 
    //private int width, height, 
    private static Color BUTTON_COLOR = new Color(0x29, 0x28, 0x29);
+   private static Color BUTTON_TEXT = new Color(0xff, 0xff, 0xff);
+   
+   private GUIListener gl = new GUIListener();
    
    /**
     * Constructor for a NGUI
@@ -27,7 +31,8 @@ public class NGUI extends JPanel {
 
       String[] test = {"hi", "how", "are", "you"};
       
-      Panel yearGrid = new NewYearPlanner();
+      //Panel yearGrid = new NewYearPlanner();
+      Panel yearGrid = new Panel();
 
       JComboBox<String> depts = new JComboBox<String>(test);
       JComboBox<String> courses = new JComboBox<String>(test);
@@ -35,6 +40,9 @@ public class NGUI extends JPanel {
       JButton addClass = new JButton("add class");
 
       addClass.setBackground(BUTTON_COLOR);
+      addClass.setForeground(BUTTON_TEXT);
+      addClass.setBorder(new EmptyBorder(0, 0, 0, 0));
+      addClass.setFocusPainted(false);
 
       JPanel rightPanel = new JPanel();
       rightPanel.setLayout(new GridLayout(4, 1, 0, 100));
