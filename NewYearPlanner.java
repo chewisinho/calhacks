@@ -30,12 +30,19 @@ public class NewYearPlanner extends JPanel {
         picLabel = new JLabel(new ImageIcon(background));
         add(picLabel);
     }
+
+    public void paintComponent(Graphics g) {
+       Graphics2D g2 = (Graphics2D) g;
+       g2.setColor(Color.BLACK);
+       g2.fillRect(0, 0, 100, 100);
+    }
     
     public void refresh() throws IOException {
         add(picLabel);
+        repaint(); // testing paintComponent
         System.out.println("Entered REFRESH.");
         System.out.println(Schedule.NUM_YEARS * Schedule.NUM_TERMS);
-        for (int i = 0; i < Schedule.NUM_YEARS * Schedule.NUM_TERMS; i += 1) {
+        for (int i = 0; i < Schedule.NUM_YEARS * Schedule.NUM_TERM; i++) {
             System.out.println("Entering loop " + i);
             Term t = _schedule.getTerm(i);
             int j = 0;
