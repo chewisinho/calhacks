@@ -8,7 +8,5 @@ public class Main {
     public static void main(String[] args) {
         GUI _display = new GUI(args, WINDOW_WIDTH, WINDOW_HEIGHT);
         Schedule _schedule = new Schedule();
-        TextDisplay _textDisplay = new TextDisplay(_schedule);
-        _textDisplay.run();
     }
 }
