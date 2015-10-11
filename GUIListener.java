@@ -49,7 +49,7 @@ public class GUIListener implements ActionListener, MouseMotionListener {
                _ngui._yearGrid.refresh();
            }
        } catch (Exception ex) {
-           
+          ex.printStackTrace(); 
        }
    }
    
