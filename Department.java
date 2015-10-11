@@ -15,8 +15,11 @@ public class Department {
 		_name = name;
 		String url = "http://guide.berkeley.edu/courses/" + name + "/";
         URL links = new URL(url);
-        DownloadPage.sourceCodeGen(links);
-        String input = DownloadPage.getSourceCode();
+        String input = DownloadPage.sourceCodeGen(links);
         courses = Parse.createArray(input);
+	}
+
+	public String toString() {
+		return _name + " @ " + courses;
 	}
 }

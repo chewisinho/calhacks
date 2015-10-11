@@ -20,12 +20,10 @@ public class Parse {
         departments = makeDepartments();
         String url;
         for (int i = 0; i < departments.size(); i++) {
-            for (int j = 0; j < departments.size(); j++) {
-                Department caldepartment = new Department(departments.get(j));
-                Parse.classlist.add(caldepartment);
-            }
+            Department caldepartment = new Department(departments.get(i));
+            Parse.classlist.add(caldepartment);
+            System.out.println(caldepartment._name);
         }
-        System.out.println(classlist);
 	}
 
 	public static ArrayList<ArrayList<String>> createArray(String input){
@@ -36,8 +34,12 @@ public class Parse {
             if (elem.contains("courseblocktitle")) {
             	ArrayList<String> temp = new ArrayList<String>();
             	// adds Course Number
-            	s.next();
-            	String coursenumber = s.next();
+                s.next();
+                elem = s.next();
+                while (!elem.contains("\"")) {
+                    elem = s.next();
+                }
+            	String coursenumber = elem;
             	coursenumber = coursenumber.substring(0, coursenumber.length() - 1);
             	temp.add(coursenumber);
             	for (int i = 0; i < 5; i++){
@@ -51,17 +53,21 @@ public class Parse {
             		elem2 = s.next();
             	}
             	coursetitle += " " + elem2;
-            	coursetitle = coursetitle.substring(15, coursetitle.length() - 7);
-        		temp.add(coursetitle);
+                coursetitle = coursetitle.substring(15, coursetitle.length() - 7);
+                temp.add(coursetitle);
         		// adds Course Units
-        		s.next();
+                s.next();
         		String courseunits = "";
         		String elem3 = s.next();
         		while (!elem3.contains("<")) {
         			courseunits += " " + elem3;
         			elem3 = s.next();
         		}
-        		courseunits = courseunits.substring(15);
+                courseunits += " " + elem3;
+                courseunits = courseunits.substring(15, courseunits.length() - 24);
+                if (courseunits.endsWith(" ")) {
+                    courseunits = courseunits.substring(0, courseunits.length() - 1);
+                }
         		temp.add(courseunits);
             	L.add(temp);
             }

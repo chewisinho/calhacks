@@ -16,22 +16,17 @@ Gets source code from a website for the use of CalHacks 2.0 program. */
 
 public class DownloadPage {
 
-    public static void sourceCodeGen(URL url) throws IOException {
+    public static String sourceCodeGen(URL url) throws IOException {
         // Get the input stream through URL Connection
+        String sourcecode = "";
         URLConnection con = url.openConnection();
         InputStream is = con.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line = null;
         while ((line = br.readLine()) != null) {
-            DownloadPage.sourcecode += line;
+            sourcecode += line;
         }
-    }
-
-    /* String that is the sourcode. */
-    private static String sourcecode;
-
-    public static String getSourceCode() {
-        return DownloadPage.sourcecode;
+        return sourcecode;
     }
 
 }
