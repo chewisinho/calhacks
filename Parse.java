@@ -1,9 +1,13 @@
-package calhacks;
 
 import java.lang.String;
 import java.util.*;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 /*@author Alexander Tran
 October 9, 2015
@@ -11,23 +15,16 @@ Parses the source code from DownloadPage.java to get the specific date. */
 
 public class Parse {
     
-	public static void run() throws IOException {
-		DownloadPage.sourceCodeGen();
-		String input = DownloadPage.getSourceCode();
-
-		Parse.classlist = createArray(input);
+	public static void main(String[] args) throws IOException {
+        departments = makeDepartments();
+        String url;
+        for (int i = 0; i < departments.size(); i++) {
+            for (int j = 0; j < departments.size(); j++) {
+                Department caldepartment = new Department(departments.get(j));
+                Parse.classlist.add(caldepartment);
+            }
+        }   
 	}
-	
-	public static ArrayList<ArrayList<String>> makeTestList() {
-		ArrayList<ArrayList<String>> L = new ArrayList<ArrayList<String>>();
-		ArrayList<String> L1 = new ArrayList<String>();
-		
-		L1.add("hi");
-		L.add(L1);
-		return L;
-	}
-
-	// expression = "class="courseblocktitle"><a"
 
 	public static ArrayList<ArrayList<String>> createArray(String input){
 		ArrayList<ArrayList<String>> L = new ArrayList<ArrayList<String>>();
@@ -70,9 +67,57 @@ public class Parse {
         return L;
 	}
 
-	private static ArrayList<ArrayList<String>> classlist;
+	private static ArrayList<Department> classlist;
 
-	public static ArrayList<ArrayList<String>> getClassList() {
-		return Parse.classlist;
-	}
+    private static ArrayList<String> departments;
+
+    public static ArrayList<Department> getClassList() {
+        return Parse.classlist;
+    }
+
+    public static ArrayList<String> getDepartments() {
+        return Parse.departments;
+    }
+
+
+    public static String makeConnectionToCourses() throws IOException {
+        URL url = new URL("http://guide.berkeley.edu/courses/");
+        URLConnection con = url.openConnection();
+        InputStream is = con.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String line = null;
+        String source = "";
+        while ((line = br.readLine()) != null) {
+           source += line;
+        }
+        return source;
+    }
+
+    public static ArrayList<String> makeDepartments() throws IOException {
+        ArrayList<String> L = new ArrayList<String>();
+        String source = makeConnectionToCourses();
+        Scanner s = new Scanner(source);
+        String temp;
+        while (s.hasNext()) {
+            String elem = s.next();
+            if (elem.contains("courses")) {
+                L.add(elem);
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            L.remove(0);
+        }
+        L.remove(L.size() - 1);
+        L.remove(L.size() - 1);
+        int deleteindex = 0;
+        for (int j = 0; j < L.size(); j++) {
+            L.set(j,L.get(j).substring(15));
+            deleteindex = L.get(j).indexOf("/");
+            L.set(j,L.get(j).substring(0, deleteindex));
+        }
+        return L;
+    }    
+
 }
+
+

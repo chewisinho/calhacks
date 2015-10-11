@@ -1,4 +1,3 @@
-package calhacks;
 
 //skeleton from Stack Overflow
 import java.io.BufferedReader;
@@ -17,11 +16,7 @@ Gets source code from a website for the use of CalHacks 2.0 program. */
 
 public class DownloadPage {
 
-    public static void sourceCodeGen() throws IOException {
-
-        // Make a URL to the web page
-        URL url = new URL("http://guide.berkeley.edu/courses/stat/");
-
+    public static void sourceCodeGen(URL url) throws IOException {
         // Get the input stream through URL Connection
         URLConnection con = url.openConnection();
         InputStream is = con.getInputStream();
@@ -38,6 +33,5 @@ public class DownloadPage {
     public static String getSourceCode() {
         return DownloadPage.sourcecode;
     }
-
 
 }
