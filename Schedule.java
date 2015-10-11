@@ -37,12 +37,17 @@ public class Schedule {
         }
         return unit;
     }
+    
+    /** Gets TERM. */
+    protected Term getTerm(int term) {
+        return terms.get(term);
+    }
 
     /** Contains a list of terms. */
     private final ArrayList<Term> terms =
             new ArrayList<Term>(NUM_YEARS * NUM_TERMS);
     /** The number of years of school. */
-    private static final int NUM_YEARS = 4;
+    public static final int NUM_YEARS = 4;
     /** The number of terms per year. */
-    private static final int NUM_TERMS = 3;
+    public static final int NUM_TERMS = 3;
 }

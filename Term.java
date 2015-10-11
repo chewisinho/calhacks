@@ -29,6 +29,16 @@ public class Term {
     protected void clear() {
         courses.clear();
     }
+    
+    /** Returns a string representation of the courses. */
+    @Override
+    public String toString() {
+        String result = "";
+        for (Course c : courses) {
+            result = result + c.getCourseName() + " | ";
+        }
+        return result;
+    }
 
     /** The maximum number of classes taken per term. */
     private static final int MAX_CLASSES = 5;

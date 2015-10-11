@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-
-=======
 package calhacks;
->>>>>>> 877436e559253f390530592998a6d89c16e9abe4
+
 //skeleton from Stack Overflow
 import java.io.BufferedReader;
 import java.io.IOException;
