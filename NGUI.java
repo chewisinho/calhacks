@@ -48,7 +48,8 @@ public class NGUI extends JPanel {
 
       GridBagConstraints constraint = new GridBagConstraints();
       
-      String[] departments = (String[]) departmentList.keySet().toArray();
+      String[] departments = new String[departmentList.size()];
+      departmentList.keySet().toArray(departments);
       Vector<String> empty = new Vector<String>();
 
       NewYearPlanner yearGrid = new NewYearPlanner(schedule);
@@ -112,9 +113,10 @@ public class NGUI extends JPanel {
    
    public void updateCourses() {
        courses.removeAllItems();
-       for (String courseNum : (String[])
-               departmentList.get((String)
-                       depts.getSelectedItem())._courseMap.keySet().toArray()) {
+       HashMap<String, Course> _courses = departmentList.get((String) depts.getSelectedItem())._courseMap;
+       String[] courseNums = new String[_courses.size()];
+       _courses.keySet().toArray(courseNums);
+       for (String courseNum : courseNums) {
            courses.addItem(courseNum);
        }
    }

@@ -10,9 +10,9 @@ public class Department {
 	public String _name;
 
 	public ArrayList<ArrayList<String>> courses;
-	protected Map<String, Course> _courseMap;
+	protected HashMap<String, Course> _courseMap;
 	
-	public Department(String name, Map<String, Course> courseMap) {
+	public Department(String name, HashMap<String, Course> courseMap) {
 	    _name = name;
 	    _courseMap = courseMap;
 	}
