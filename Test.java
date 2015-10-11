@@ -1,5 +1,6 @@
 package calhacks;
 import javax.swing.*;
+import java.io.IOException;
 
 public class Test {
 
@@ -10,8 +11,11 @@ public class Test {
       JFrame f = new JFrame("demo");
       f.setSize(WIDTH, HEIGHT);
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-      JComponent contentPane = new NGUI(WIDTH, HEIGHT);
+      
+      JComponent contentPane = null; //initialize before try/catch
+      try { 
+         contentPane = new NGUI(WIDTH, HEIGHT);
+      } catch (IOException e) { }
       contentPane.setOpaque(true);
       f.setContentPane(contentPane);
 
