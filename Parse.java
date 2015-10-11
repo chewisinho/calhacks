@@ -1,3 +1,4 @@
+package calhacks;
 
 import java.lang.String;
 import java.util.*;
@@ -23,7 +24,8 @@ public class Parse {
                 Department caldepartment = new Department(departments.get(j));
                 Parse.classlist.add(caldepartment);
             }
-        }   
+        }
+        System.out.println(classlist);
 	}
 
 	public static ArrayList<ArrayList<String>> createArray(String input){
@@ -67,7 +69,7 @@ public class Parse {
         return L;
 	}
 
-	private static ArrayList<Department> classlist;
+	private static ArrayList<Department> classlist = new ArrayList<Department>();
 
     private static ArrayList<String> departments;
 

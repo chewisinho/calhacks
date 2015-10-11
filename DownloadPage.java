@@ -1,4 +1,4 @@
-
+package calhacks;
 //skeleton from Stack Overflow
 import java.io.BufferedReader;
 import java.io.IOException;
