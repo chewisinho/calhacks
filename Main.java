@@ -8,10 +8,9 @@ import javax.swing.SwingUtilities;
 
 public class Main {
     
-    private static final int WIDTH = 1280;
-    private static final int HEIGHT = 720; 
+    public static final int WIDTH = 1280, HEIGHT = 720; 
 
-    public static void createGUI() {
+    public static void createGUI() throws IOException {
        JFrame f = new JFrame("demo");
        f.setSize(WIDTH, HEIGHT);
        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +30,11 @@ public class Main {
         Schedule _schedule = new Schedule();
         SwingUtilities.invokeLater(new Runnable() {
           public void run() {
-             createGUI();
+              try {
+                  createGUI();
+              } catch (IOException ex) {
+                  ex.printStackTrace();
+              }
           }
        });
     }
