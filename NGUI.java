@@ -27,11 +27,7 @@ public class NGUI extends JPanel {
 
       String[] test = {"hi", "how", "are", "you"};
       
-      Panel yearGrid = new Panel();
-      Label l = new Label("yo");
-      forceSize(yearGrid, new Dimension(width * 2/3, height));
-      yearGrid.setBackground(Color.RED);
-      yearGrid.add(l, BorderLayout.CENTER);
+      Panel yearGrid = new NewYearPlanner();
 
       JComboBox<String> depts = new JComboBox<String>(test);
       JComboBox<String> courses = new JComboBox<String>(test);

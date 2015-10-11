@@ -41,8 +41,8 @@ public class Term {
     }
 
     /** The maximum number of classes taken per term. */
-    private static final int MAX_CLASSES = 5;
+    public static final int MAX_CLASSES = 5;
     /** Contains a list of the classes in the term. */
-    private final ArrayList<Course> courses =
+    protected final ArrayList<Course> courses =
             new ArrayList<Course>(MAX_CLASSES);
 }

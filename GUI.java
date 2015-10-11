@@ -7,42 +7,38 @@ import Acme.*;
  * GUI class for four year plan
  */
 public class GUI extends WindowController {
-   
-   private static int width; //width of window
-   private static int height; //height of window
-   private static int boxheight; //yearplanner height
-   private static int boxwidth; //yearplanner width
-   
-   private static final int LEFT_PADDING = 60;
-   private static final int BOTTOM_PADDING = 60;
-   static final int TOP_PADDING = BOTTOM_PADDING * 2;
-   
+
+   private static int boxHeight;
+   private static int boxWidth;
+
+   public static final int LEFT_PADDING = 60, BOTTOM_PADDING = 60;
+   public static final int TOP_PADDING = BOTTOM_PADDING * 2;
+
    //private static int  // y coord for text to be stated
    //private static int  //x coord for text to be stated
 
    /* Contains the schedule to be displayed. */
    private Schedule _schedule;
-   
+
+   public static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
+
    /**
     * Constructor for a GUI
     * @param args command line arguments; pass them in from main
     * @param width width of the window
     * @param height height of the window
     */
-   public GUI(String[] args, int w, int h, Schedule schedule) {
+   public GUI(String[] args, Schedule schedule) {
        _schedule = schedule;
-	   width = w;
-	   height = h;
-	   new Acme.MainFrame(this, args, width, height);
+	   new Acme.MainFrame(this, args, WINDOW_WIDTH, WINDOW_HEIGHT);
      
 	   //year planner starter pack
-       boxheight = h - TOP_PADDING - BOTTOM_PADDING;
-       boxwidth = (w / 3) * 2 - LEFT_PADDING;
-       YearPlanner mainbox = new YearPlanner (LEFT_PADDING ,TOP_PADDING,
-				 boxwidth, boxheight, canvas);
-	   new Text( "Four Year Planner", width / 2 , TOP_PADDING / 2 , canvas);
-
-  
+       boxHeight = WINDOW_HEIGHT - TOP_PADDING - BOTTOM_PADDING;
+       boxWidth = (WINDOW_WIDTH / Schedule.NUM_TERMS) * 2 - LEFT_PADDING;
+       YearPlanner mainbox = new YearPlanner(LEFT_PADDING, TOP_PADDING,
+				 boxWidth, boxHeight, canvas, schedule);
+	   new Text("Four Year Planner", WINDOW_WIDTH / 2,
+	           TOP_PADDING / 2 , canvas);
    }
 
    /**
@@ -51,9 +47,6 @@ public class GUI extends WindowController {
     */
 	public void onMouseClick(Location point) {
       System.out.println("YOOOOOO");
-      
-      
-      
    }
    
 }
