@@ -11,11 +11,18 @@ import java.io.IOException;
 */
 public class NGUI extends JPanel {
 
-   //private int width, height, 
+   private static Font TEXT_FONT = new Font("Century Gothic", Font.PLAIN, 12);
    private static Color BUTTON_COLOR = new Color(0x29, 0x28, 0x29);
    private static Color BUTTON_TEXT = new Color(0xff, 0xff, 0xff);
-   
-   private GUIListener gl = new GUIListener();
+
+   private JComboBox<String> depts;
+   private JComboBox<String> courses;
+   private JComboBox<String> terms;   
+   private JButton addClass;
+
+   private GUIListener gl = new GUIListener(this);
+
+
    
    /**
     * Constructor for a NGUI
@@ -28,19 +35,28 @@ public class NGUI extends JPanel {
 
       GridBagConstraints constraint = new GridBagConstraints();
 
-      String[] test = {"hi", "how", "are", "you"};
-      
-      JPanel yearGrid = new NewYearPlanner();
+      String[] test = {"hi", "how", "are", "you",
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you", 
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you",
+                       "hi", "how", "are", "you"};
 
-      JComboBox<String> depts = new JComboBox<String>(test);
-      JComboBox<String> courses = new JComboBox<String>(test);
-      JComboBox<String> terms = new JComboBox<String>(test);
-      JButton addClass = new JButton("add class");
+      JPanel yearGrid = new JPanel(); // change back to YearPanel
 
-      addClass.setBackground(BUTTON_COLOR);
-      addClass.setForeground(BUTTON_TEXT);
-      addClass.setBorder(new EmptyBorder(0, 0, 0, 0));
-      addClass.setFocusPainted(false);
+      depts = new JComboBox<String>(test);
+      courses = new JComboBox<String>(test);
+      terms = new JComboBox<String>(test);
+      addClass = new JButton("add class");
+
+      applyStyle(depts);
+      applyStyle(courses);
+      applyStyle(terms);
+      applyStyleButton(addClass);
+
 
       JPanel rightPanel = new JPanel();
       rightPanel.setLayout(new GridLayout(4, 1, 0, 100));
@@ -67,6 +83,37 @@ public class NGUI extends JPanel {
       //add(header, BorderLayout.PAGE_START);
       add(wrapper);
    }
+
+   public void onAddClass() {
+      Object dept = depts.getSelectedItem();     // these types can be of
+      Object course = courses.getSelectedItem(); // Department, Course, Term
+      Object term = terms.getSelectedItem();
+      // do something with these
+      System.out.println(dept + ", " + course + ", " + term);
+   }
+
+   /**
+    * Applies the standard style to JButton objects
+    * @param b JButton to style
+    */
+   private void applyStyleButton(JButton b) {
+      applyStyle(b);
+      b.setFocusPainted(false);
+      b.addActionListener(gl);
+   }
+      
+
+   /**
+    * Applies the standard style of input components
+    * @param c JComponent to style
+    */
+   private void applyStyle(JComponent c) {
+      c.setBackground(BUTTON_COLOR);
+      c.setFont(TEXT_FONT);
+      c.setForeground(BUTTON_TEXT);
+      c.setBorder(new EmptyBorder(0, 0, 0, 0));
+   }
+      
 
    private void forceSize(Component c, Dimension d) {
       c.setPreferredSize(d);
