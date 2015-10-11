@@ -26,7 +26,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        //Parse.run();
+        Parse.run();
         Schedule _schedule = new Schedule();
         SwingUtilities.invokeLater(new Runnable() {
           public void run() {
