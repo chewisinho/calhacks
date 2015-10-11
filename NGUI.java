@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class NGUI extends JPanel {
    private JComboBox<String> terms;   
    private JButton addClass;
    
-   private ArrayList<Department> departmentList;
+   private HashMap<String, Department> departmentList;
 
    private GUIListener gl = new GUIListener(this);
    private Schedule _schedule;
@@ -41,14 +42,13 @@ public class NGUI extends JPanel {
       //JPanel header = new JPanel();
       JPanel wrapper = new JPanel();
       wrapper.setLayout(new GridBagLayout());
-      departmentList = Parse.getClassList();
+      departmentList = ParseFromText._departmentMap;
       this.addMouseMotionListener(gl);
       _schedule = schedule;
 
       GridBagConstraints constraint = new GridBagConstraints();
       
-      String[] departments = new String[Parse.getDepartments().size()];
-      Parse.getDepartments().toArray(departments);
+      String[] departments = (String[]) departmentList.keySet().toArray();
       Vector<String> empty = new Vector<String>();
 
       NewYearPlanner yearGrid = new NewYearPlanner(schedule);
@@ -95,24 +95,8 @@ public class NGUI extends JPanel {
       String course = (String) courses.getSelectedItem();
       String term = (String) terms.getSelectedItem();
       String units = "0";
-      for (Department d : departmentList) {
-          if (d._name.equals(dept)) {
-              for (ArrayList<String> info : d.courses) {
-                  if (info.get(0).equals(course)) {
-                      units = info.get(2);
-                  }
-              }
-          }
-      }
-      int termNumber = 0;
-      for (int i = 0; i < _terms.length; i += 1) {
-          if (term.equals(_terms[i])) {
-              termNumber = i;
-              break;
-          }
-      }
-      Course _course = new Course(dept.toUpperCase(), course, units);
-      _schedule.add(_course, termNumber);
+      Course _course = departmentList.get(dept)._courseMap.get(course);
+      _schedule.add(_course, Term.getTermNumber(term));
       _yearGrid.refresh();
    }
 
@@ -127,18 +111,10 @@ public class NGUI extends JPanel {
    }
    
    public void updateCourses() {
-       Vector<String> courseList = new Vector<String>();
-       String deptName = (String) depts.getSelectedItem();
-       for (Department d : departmentList) {
-           if (deptName.equals(d._name)) {
-               for (ArrayList<String> course : d.courses) {
-                   courseList.add(course.get(0));
-               }
-               break;
-           }
-       }
        courses.removeAllItems();
-       for (String courseNum : courseList) {
+       for (String courseNum : (String[])
+               departmentList.get((String)
+                       depts.getSelectedItem())._courseMap.keySet().toArray()) {
            courses.addItem(courseNum);
        }
    }

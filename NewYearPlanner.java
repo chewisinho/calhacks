@@ -42,7 +42,7 @@ public class NewYearPlanner extends JPanel {
         repaint(); // testing paintComponent
         System.out.println("Entered REFRESH.");
         System.out.println(Schedule.NUM_YEARS * Schedule.NUM_TERMS);
-        for (int i = 0; i < Schedule.NUM_YEARS * Schedule.NUM_TERM; i++) {
+        for (int i = 0; i < Schedule.NUM_YEARS * Schedule.NUM_TERMS; i++) {
             System.out.println("Entering loop " + i);
             Term t = _schedule.getTerm(i);
             int j = 0;

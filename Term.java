@@ -39,6 +39,21 @@ public class Term {
         }
         return result;
     }
+    
+    public static int getTermNumber(String term) {
+        String[] _terms = {"1st Year Fall", "1st Year Spring", "1st Year Summer",
+                "2nd Year Fall", "2nd Year Spring", "2nd Year Summer",
+                "3rd Year Fall", "3rd Year Spring", "3rd Year Summer",
+                "4th Year Fall", "4th Year Spring", "4th Year Summer"};
+        int termNumber = 0;
+        for (int i = 0; i < _terms.length; i += 1) {
+            if (term.equals(_terms[i])) {
+                termNumber = i;
+                break;
+            }
+        }
+        return termNumber;
+    }
 
     /** The maximum number of classes taken per term. */
     public static final int MAX_CLASSES = 5;
