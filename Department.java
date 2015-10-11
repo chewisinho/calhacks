@@ -10,6 +10,12 @@ public class Department {
 	public String _name;
 
 	public ArrayList<ArrayList<String>> courses;
+	protected Map<String, Course> _courseMap;
+	
+	public Department(String name, Map<String, Course> courseMap) {
+	    _name = name;
+	    _courseMap = courseMap;
+	}
 
 	public Department(String name) throws IOException {
 		_name = name;

@@ -35,8 +35,7 @@ public class NewYearPlanner extends JPanel {
         add(picLabel);
         System.out.println("Entered REFRESH.");
         System.out.println(Schedule.NUM_YEARS * Schedule.NUM_TERMS);
-        g.setColor(Color.BLACK);
-        for (int i = 0; true; i += 1) {
+        for (int i = 0; i < Schedule.NUM_YEARS * Schedule.NUM_TERMS; i += 1) {
             System.out.println("Entering loop " + i);
             Term t = _schedule.getTerm(i);
             int j = 0;
@@ -46,5 +45,6 @@ public class NewYearPlanner extends JPanel {
                 j += 1;
             }
         }
+        System.out.println("After loop.");
     }
 }

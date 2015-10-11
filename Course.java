@@ -12,9 +12,10 @@ public class Course implements Comparable<Course> {
     /** Constructor function which takes in the DEPARTMENT name, the
      * COURSEID, and the number of UNITS.
      */
-    protected Course(String department, String courseID, String units) {
+    protected Course(String department, String courseID, String courseTitle, String units) {
         _department = department;
         _courseID = courseID;
+        _courseTitle = courseTitle;
         Pattern unitCount = Pattern.compile("[1-5]");
         Matcher unitCountMatch = unitCount.matcher(units);
         if (!unitCountMatch.matches()) {
@@ -80,4 +81,6 @@ public class Course implements Comparable<Course> {
     private String _courseSuffix = "";
     /** The course ID. */
     private String _courseID;
+    /** The title of the course. */
+    private String _courseTitle;
 }
