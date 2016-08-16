@@ -38,10 +38,8 @@ public class NGUI extends JPanel {
     * Constructor for a NGUI
     */
    public NGUI(int width, int height, Schedule schedule) throws IOException {
+      this.setLayout(new GridBagLayout());
 
-      //JPanel header = new JPanel();
-      JPanel wrapper = new JPanel();
-      wrapper.setLayout(new GridBagLayout());
       departmentList = ParseFromText._departmentMap;
       this.addMouseMotionListener(gl);
       _schedule = schedule;
@@ -82,13 +80,10 @@ public class NGUI extends JPanel {
       constraint.gridy = 0;
       constraint.gridwidth = 2;
       constraint.gridheight = GridBagConstraints.REMAINDER;
-      wrapper.add(yearGrid);
+      this.add(yearGrid);
 
       constraint.gridwidth = GridBagConstraints.REMAINDER;
-      wrapper.add(rightPanel);
-
-      //add(header, BorderLayout.PAGE_START);
-      add(wrapper);
+      this.add(rightPanel);
    }
 
    public void onAddClass() throws IOException {

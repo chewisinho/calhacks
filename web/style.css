@@ -1,0 +1,42 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    height:100%;
+}
+
+.yeargrid, .selection {
+    height:500px;
+    float:left;
+}
+
+.yeargrid {
+    background-color:red;
+    width:66.6%
+}
+
+.yeargrid .termbox {
+    width:155px;
+    height:155px;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+    background-color:white;
+}
+
+.selection {
+    text-align: center;
+    padding-top: 20px;
+    background-color:green;
+    width:33.3%;
+}
+
+select {
+    text-decoration:none;
+    border:none;
+    outline:none;
+    margin-bottom: 10px;
+}
